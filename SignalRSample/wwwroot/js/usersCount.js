@@ -17,7 +17,8 @@ connectionUserCount.on("updateTotalUsers", (value) => {
 
 //invoke hub methods aka send notification to hub
 function NewWindowLoadedOnClinet() {
-    connectionUserCount.send("NewWindowLoaded");
+    // connectionUserCount.send("NewWindowLoaded");
+    connectionUserCount.invoke("NewWindowLoaded").then((value) => console.log(value));
 }
 //start connection
 function fulfilled() {

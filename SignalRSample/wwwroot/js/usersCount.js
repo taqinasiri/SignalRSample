@@ -1,7 +1,10 @@
 //Create connection
 
 var connectionUserCount = new signalR.HubConnectionBuilder()
-    .withUrl("hubs/userCount")
+    //.configureLogging(signalR.LogLevel.Trace)
+    .withUrl("hubs/userCount", signalR.HttpTransportType.WebSockets)
+    //.withUrl("hubs/userCount", signalR.HttpTransportType.LongPolling)
+    //.withUrl("hubs/userCount", signalR.HttpTransportType.ServerSentEvents)
     .build();
 
 //connect to methods that hub invoked aka receive notification for the hub

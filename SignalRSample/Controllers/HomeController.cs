@@ -24,6 +24,8 @@ public class HomeController : Controller
 
     public IActionResult UserCount() => View();
 
+    public IActionResult BasicChat() => View();
+
     public async Task<IActionResult> DeathlyHallows(string? type)
     {
         if(string.IsNullOrEmpty(type))

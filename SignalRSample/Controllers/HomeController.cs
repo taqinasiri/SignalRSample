@@ -16,24 +16,19 @@ public class HomeController : Controller
         _deathlyHub = deathlyHub;
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+    public IActionResult Index() => View();
 
-    public IActionResult Notification()
-    {
-        return View();
-    }
+    public IActionResult Notification() => View();
 
-    [ResponseCache(Duration = 0,Location = ResponseCacheLocation.None,NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    public IActionResult HouseGroup() => View();
 
-    public async Task<IActionResult> DeathlyHallows(string type)
+    public IActionResult UserCount() => View();
+
+    public async Task<IActionResult> DeathlyHallows(string? type)
     {
+        if(string.IsNullOrEmpty(type))
+            return View();
+
         if(SD.DeathlyHallowRace.ContainsKey(type))
         {
             SD.DeathlyHallowRace[type]++;
@@ -42,6 +37,6 @@ public class HomeController : Controller
             SD.DeathlyHallowRace[SD.Cloak],
             SD.DeathlyHallowRace[SD.Stone],
             SD.DeathlyHallowRace[SD.Wand]);
-        return Accepted();
+        return View();
     }
 }

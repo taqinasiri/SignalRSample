@@ -2,6 +2,7 @@
 
 var connectionUserCount = new signalR.HubConnectionBuilder()
     //.configureLogging(signalR.LogLevel.Trace)
+    .withAutomaticReconnect()
     .withUrl("/hubs/userCount", signalR.HttpTransportType.WebSockets)
     //.withUrl("hubs/userCount", signalR.HttpTransportType.LongPolling)
     //.withUrl("hubs/userCount", signalR.HttpTransportType.ServerSentEvents)
@@ -16,6 +17,18 @@ connectionUserCount.on("updateTotalViews", (value) => {
 connectionUserCount.on("updateTotalUsers", (value) => {
     var newCountSpan = document.getElementById("totalUsereCounter");
     newCountSpan.innerHTML = value;
+});
+
+connectionUserCount.onclose((error) => {
+    document.body.style.background = "red";
+});
+
+connectionUserCount.onreconnected((connectionId) => {
+    document.body.style.background = "green";
+});
+
+connectionUserCount.onreconnecting((connectionId) => {
+    document.body.style.background = "orange";
 });
 
 //invoke hub methods aka send notification to hub

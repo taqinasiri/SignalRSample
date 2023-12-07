@@ -8,7 +8,7 @@ export declare function configureFetch(obj: {
 export declare function configureAbortController(obj: {
     _abortControllerType: {
         prototype: AbortController;
-        new (): AbortController;
+        new(): AbortController;
     };
 }): boolean;
 /** @private */

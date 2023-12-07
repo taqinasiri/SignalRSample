@@ -1,9 +1,5 @@
-﻿using Microsoft.Build.Framework;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
-using SignalRSample.Models.ViewModel;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalRSample.Hubs;
 

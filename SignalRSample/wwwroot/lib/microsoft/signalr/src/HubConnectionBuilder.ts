@@ -14,7 +14,7 @@ import { JsonHubProtocol } from "./JsonHubProtocol";
 import { NullLogger } from "./Loggers";
 import { Arg, ConsoleLogger } from "./Utils";
 
-const LogLevelNameMapping: {[k: string]: LogLevel} = {
+const LogLevelNameMapping: { [k: string]: LogLevel } = {
     trace: LogLevel.Trace,
     debug: LogLevel.Debug,
     info: LogLevel.Information,
@@ -41,7 +41,7 @@ function parseLogLevel(name: string): LogLevel {
 /** A builder for configuring {@link @microsoft/signalr.HubConnection} instances. */
 export class HubConnectionBuilder {
     private _serverTimeoutInMilliseconds?: number;
-    private _keepAliveIntervalInMilliseconds ?: number;
+    private _keepAliveIntervalInMilliseconds?: number;
 
     /** @internal */
     public protocol?: IHubProtocol;

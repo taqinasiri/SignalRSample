@@ -38,8 +38,8 @@ export class MessageBuffer {
         // Only count invocation messages. Acks, pings, etc. don't need to be resent on reconnect
         if (this._isInvocationMessage(message)) {
             this._totalMessageCount++;
-            let backpressurePromiseResolver: (value: void) => void = () => {};
-            let backpressurePromiseRejector: (value?: void) => void = () => {};
+            let backpressurePromiseResolver: (value: void) => void = () => { };
+            let backpressurePromiseRejector: (value?: void) => void = () => { };
 
             if (isArrayBuffer(serializedMessage)) {
                 this._bufferedByteCount += serializedMessage.byteLength;
@@ -154,7 +154,7 @@ export class MessageBuffer {
     public async _resend(): Promise<void> {
         const sequenceId = this._messages.length !== 0
             ? this._messages[0]._id
-            :  this._totalMessageCount + 1;
+            : this._totalMessageCount + 1;
         await this._connection.send(this._protocol.writeMessage({ type: MessageType.Sequence, sequenceId }));
 
         // Get a local variable to the _messages, just in case messages are acked while resending
@@ -204,12 +204,12 @@ export class MessageBuffer {
                     if (!this._reconnectInProgress) {
                         await this._connection.send(this._protocol.writeMessage({ type: MessageType.Ack, sequenceId: this._latestReceivedSequenceId }))
                     }
-                // Ignore errors, that means the connection is closed and we don't care about the Ack message anymore.
+                    // Ignore errors, that means the connection is closed and we don't care about the Ack message anymore.
                 } catch { }
 
                 clearTimeout(this._ackTimerHandle);
                 this._ackTimerHandle = undefined;
-            // 1 second delay so we don't spam Ack messages if there are many messages being received at once.
+                // 1 second delay so we don't spam Ack messages if there are many messages being received at once.
             }, 1000);
         }
     }

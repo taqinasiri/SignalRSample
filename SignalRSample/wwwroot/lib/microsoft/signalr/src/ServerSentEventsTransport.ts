@@ -21,7 +21,7 @@ export class ServerSentEventsTransport implements ITransport {
     public onclose: ((error?: Error | unknown) => void) | null;
 
     constructor(httpClient: HttpClient, accessToken: string | undefined, logger: ILogger,
-                options: IHttpConnectionOptions) {
+        options: IHttpConnectionOptions) {
         this._httpClient = httpClient;
         this._accessToken = accessToken;
         this._logger = logger;
@@ -63,7 +63,7 @@ export class ServerSentEventsTransport implements ITransport {
                 const [name, value] = getUserAgentHeader();
                 headers[name] = value;
 
-                eventSource = new this._options.EventSource!(url, { withCredentials: this._options.withCredentials, headers: { ...headers, ...this._options.headers} } as EventSourceInit);
+                eventSource = new this._options.EventSource!(url, { withCredentials: this._options.withCredentials, headers: { ...headers, ...this._options.headers } } as EventSourceInit);
             }
 
             try {
@@ -86,8 +86,8 @@ export class ServerSentEventsTransport implements ITransport {
                         this._close();
                     } else {
                         reject(new Error("EventSource failed to connect. The connection could not be found on the server,"
-                        + " either the connection ID is not present on the server, or a proxy is refusing/buffering the connection."
-                        + " If you have multiple servers check that sticky sessions are enabled."));
+                            + " either the connection ID is not present on the server, or a proxy is refusing/buffering the connection."
+                            + " If you have multiple servers check that sticky sessions are enabled."));
                     }
                 };
 

@@ -100,8 +100,8 @@ export function isArrayBuffer(val: any): val is ArrayBuffer {
 
 /** @private */
 export async function sendMessage(logger: ILogger, transportName: string, httpClient: HttpClient, url: string,
-                                  content: string | ArrayBuffer, options: IHttpConnectionOptions): Promise<void> {
-    const headers: {[k: string]: string} = {};
+    content: string | ArrayBuffer, options: IHttpConnectionOptions): Promise<void> {
+    const headers: { [k: string]: string } = {};
 
     const [name, value] = getUserAgentHeader();
     headers[name] = value;
@@ -111,7 +111,7 @@ export async function sendMessage(logger: ILogger, transportName: string, httpCl
     const responseType = isArrayBuffer(content) ? "arraybuffer" : "text";
     const response = await httpClient.post(url, {
         content,
-        headers: { ...headers, ...options.headers},
+        headers: { ...headers, ...options.headers },
         responseType,
         timeout: options.timeout,
         withCredentials: options.withCredentials,
@@ -205,7 +205,7 @@ export function getUserAgentHeader(): [string, string] {
     if (Platform.isNode) {
         userAgentHeaderName = "User-Agent";
     }
-    return [ userAgentHeaderName, constructUserAgent(VERSION, getOsName(), getRuntime(), getRuntimeVersion()) ];
+    return [userAgentHeaderName, constructUserAgent(VERSION, getOsName(), getRuntime(), getRuntimeVersion())];
 }
 
 /** @private */

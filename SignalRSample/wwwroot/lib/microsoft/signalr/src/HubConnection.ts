@@ -70,8 +70,7 @@ export class HubConnection {
     private _timeoutHandle?: any;
     private _pingServerHandle?: any;
 
-    private _freezeEventListener = () =>
-    {
+    private _freezeEventListener = () => {
         this._logger.log(LogLevel.Warning, "The page is being frozen, this will likely lead to the connection being closed and messages being lost. For more information see the docs at https://learn.microsoft.com/aspnet/core/signalr/javascript-client#bsleep");
     };
 
@@ -560,7 +559,6 @@ export class HubConnection {
         } else {
             delete this._methods[methodName];
         }
-
     }
 
     /** Registers a handler that will be invoked when the connection is closed.
@@ -720,8 +718,7 @@ export class HubConnection {
             this._timeoutHandle = setTimeout(() => this.serverTimeout(), this.serverTimeoutInMilliseconds);
 
             // Set keepAlive timer if there isn't one
-            if (this._pingServerHandle === undefined)
-            {
+            if (this._pingServerHandle === undefined) {
                 let nextPing = this._nextKeepAlive - new Date().getTime();
                 if (nextPing < 0) {
                     nextPing = 0;

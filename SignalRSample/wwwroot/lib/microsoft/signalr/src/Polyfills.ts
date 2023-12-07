@@ -4,7 +4,7 @@
 // Not exported from index
 
 /** @private */
-export type EventSourceConstructor = new(url: string, eventSourceInitDict?: EventSourceInit) => EventSource;
+export type EventSourceConstructor = new (url: string, eventSourceInitDict?: EventSourceInit) => EventSource;
 
 /** @private */
 export interface WebSocketConstructor {

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SignalRSample.Hubs;
 using SignalRSample.Models;
+using SignalRSample.Models.ViewModel;
+using System.Security.Claims;
 
 namespace SignalRSample.Controllers;
 
@@ -45,6 +47,8 @@ public class HomeController : Controller
         return View();
     }
 
+    #region Order
+
     public IActionResult Order()
     {
         string[] name = ["Taqi","Mohammad","Sara","Ali","Reyha"];
@@ -80,4 +84,23 @@ public class HomeController : Controller
         var productList = _context.Orders.ToList();
         return Json(new { data = productList });
     }
+
+    #endregion Order
+
+    #region Chat
+
+    [Authorize]
+    public IActionResult Chat()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        ChatVM chatVM = new()
+        {
+            Rooms = _context.ChatRooms.ToList(),
+            MaxRoomAllowed = 4,
+            UserId = userId
+        };
+        return View(chatVM);
+    }
+
+    #endregion Chat
 }
